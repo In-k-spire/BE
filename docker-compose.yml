@@ -1,19 +1,14 @@
 version: '3'
 
 services:
-  tool-application:
+  inkspire:
     image: ${DOCKER_USERNAME}/${DOCKER_REPO}
-    container_name: tool_application
+    container_name: inkspire
     restart: always
     expose:
       - 8080
-    depends_on:
-      - tool-database
-      - tool-redis
     ports:
       - "8080:8080"
-    env_file:
-      - .env
     environment:
       TZ: Asia/Seoul
     volumes:
