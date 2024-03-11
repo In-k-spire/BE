@@ -51,6 +51,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.HOST_NAME }}
           key: ${{ secrets.GCP_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           envs: GITHUB_SHA
           script: |
             
