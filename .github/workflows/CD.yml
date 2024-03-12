@@ -59,6 +59,12 @@ jobs:
             
             cd BE
             git pull origin master
+
+            rm -rf .env
+            touch .env
+            
+            echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> .env
+            echo DOCKER_REPO=${{ secrets.DOCKER_REPO }} >> .env
             
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
