@@ -58,9 +58,6 @@ jobs:
             sudo chmod 666 /var/run/docker.sock
             
             cd BE
-            git config --global user.email "${{ secrets.GIT_EMAIL }}"
-            git config --global user.name "${{ secrets.GIT_NAME }}"
-            git config --global url.https://${{ secrets.GIT_PAT }}@github.com/.insteadOf https://github.com/
             git pull origin master
             
             sudo docker rm -f $(docker ps -qa)
