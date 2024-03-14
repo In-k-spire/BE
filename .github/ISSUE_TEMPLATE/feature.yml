@@ -1,0 +1,22 @@
+name: "feature"
+description: "새로운 기능에 대한 issue를 작성해주세요."
+labels: "feature"
+body:
+  - type: textarea
+    attributes:
+      label: 📕 Describe
+      description: 새로운 기능에 대한 설명을 작성해 주세요.
+      placeholder: 꼼꼼하게 적을수록 좋습니다!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: 🔥 TODO
+      description: 해야 하는 일에 작성해 주세여.
+      placeholder: 꼼꼼하게 적을수록 좋습니다!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: ✋🏻 More
+      description: 더 하고 싶은 말이 있다면 작성해 주세요.
