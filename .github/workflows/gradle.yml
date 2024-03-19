@@ -31,8 +31,6 @@ jobs:
 
       ## gradle build
       - name: Build with Gradle
-        run: ./gradlew build -x test
-
-      ## text application build
-      - name: Test with Gradle
-        run: ./gradlew test
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: build

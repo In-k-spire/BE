@@ -1,1 +1,1 @@
-rootProject.name = "reAct"
+rootProject.name = "inkspire"

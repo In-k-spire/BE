@@ -1,11 +1,11 @@
-package suhyang.reAct
+package suhyang.inkspire
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class ReActApplication
+class InkspireApplication
 
 fun main(args: Array<String>) {
-	runApplication<ReActApplication>(*args)
+	runApplication<InkspireApplication>(*args)
 }
