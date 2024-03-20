@@ -1,0 +1,19 @@
+spring:
+  config:
+    import: classpath:/env.yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: ${inkspire.mysql.password.mysql.password}
+    url: ${inkspire.mysql.url.mysql.url}
+    username: ${inkspire.mysql.username}
+  jpa:
+    database: sql-server
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
