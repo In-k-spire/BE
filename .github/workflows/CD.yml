@@ -16,6 +16,13 @@ jobs:
           java-version: '17'
           distribution: 'temurin' # https://github.com/actions/setup-java
 
+      - name: Make application.yml
+        run: |
+          cd ./src/main/resources
+          touch ./env.yml
+          echo "${{ secrets.ENV_YML }}" > ./env.yml
+        shell: bash
+
       ## gradle caching
       - name: Gradle Caching
         uses: actions/cache@v3
