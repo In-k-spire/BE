@@ -47,6 +47,7 @@ dependencies {
 	annotationProcessor("jakarta.annotation:jakarta.annotation-api")
 	runtimeOnly("com.mysql:mysql-connector-j")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 }
 
 tasks.withType<Test> {

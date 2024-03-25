@@ -17,3 +17,14 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
     show-sql: true
+oauth:
+  github:
+    end-point: ${oauth.github.end-point}
+    clientId: ${oauth.github.clientId}
+    clientSecret: ${oauth.github.clientSecreta}
+  google:
+    end-point: ${oauth.google.end-point}
+    clientId:  ${oauth.google.clientId}
+    scopes: ${oauth.google.scopes}
+    access-type: ${oauth.google.access-type}
+

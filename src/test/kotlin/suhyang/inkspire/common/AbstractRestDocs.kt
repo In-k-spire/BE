@@ -17,15 +17,16 @@ import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder
 import org.springframework.test.web.servlet.setup.MockMvcBuilders
 import org.springframework.web.context.WebApplicationContext
 import org.springframework.web.filter.CharacterEncodingFilter
-import suhyang.inkspire.presentation.TestController
 import suhyang.inkspire.config.RestDocsConfig
+import suhyang.inkspire.presentation.auth.AuthController
+import suhyang.inkspire.presentation.auth.AuthControllerTest
 
 
 @Disabled
-@WebMvcTest(TestController::class)
+@WebMvcTest(AuthController::class)
 @Import(RestDocsConfig::class)
 @ExtendWith(RestDocumentationExtension::class)
-public abstract class AbstractRestDocs {
+abstract class AbstractRestDocs {
 
     @Autowired
     protected lateinit var restDocs: RestDocumentationResultHandler;
