@@ -70,6 +70,10 @@ jobs:
             
             echo DOCKER_USERNAME=${{ secrets.DOCKER_USERNAME }} >> .env
             echo DOCKER_REPO=${{ secrets.DOCKER_REPO }} >> .env
+            echo DB_NAME=${{ secrets.DB_NAME_USERNAME }} >> .env
+            echo DB_USERNAME=${{ secrets.DB_NAME_USERNAME }} >> .env
+            echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
+            echo DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} >> .env
             
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
