@@ -18,7 +18,7 @@ services:
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   inkspire-database:
     image: mysql:8.0
-    container_name: tool_mysql
+    container_name: inkspire_mysql
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
