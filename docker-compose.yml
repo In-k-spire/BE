@@ -17,17 +17,14 @@ services:
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   inkspire-database:
-    image: mysql:8.0
-    container_name: tool_mysql
+    image: mysql:latest
+    container_name: inkspire_mysql
     environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
-      MYSQL_ROOT_HOST: '%'
       TZ: Asia/Seoul
-    volumes:
-      - ./mysql_data:/var/lib/mysql
     ports:
       - 3306:3306
     command:
