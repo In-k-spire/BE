@@ -1,21 +1,43 @@
 == 로그인 링크 생성
 
 HTTP Request
-include::{snippets}/auth-controller-test/uri_생성_성공/curl-request.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_성공/curl-request.adoc[]
 
 Path Parameters
-include::{snippets}/auth-controller-test/uri_생성_성공/path-parameters.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_성공/path-parameters.adoc[]
 
 Request Parameters
-include::{snippets}/auth-controller-test/uri_생성_성공/query-parameters.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_성공/query-parameters.adoc[]
 
 HTTP Response
-include::{snippets}/auth-controller-test/uri_생성_성공/http-response.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_성공/http-response.adoc[]
 
 Response Fields
-include::{snippets}/auth-controller-test/uri_생성_성공/response-body.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_성공/response-body.adoc[]
 
-=== 존재하지 않는 OAuth 제공자로 로그인 링크 생성
+== 존재하지 않는 OAuth 제공자로 로그인 링크 생성
 
 HTTP Response
-include::{snippets}/auth-controller-test/uri_생성_실패/http-response.adoc[]
+include::{snippets}/o-auth-uri-test/uri_생성_실패/http-response.adoc[]
+
+== 로그인 요청
+
+HTTP Request
+include::{snippets}/token-generation-test/토큰_생성_성공/http-request.adoc[]
+
+Path Parameters
+include::{snippets}/token-generation-test/토큰_생성_성공/path-parameters.adoc[]
+
+Request Fields
+include::{snippets}/token-generation-test/토큰_생성_성공/request-fields.adoc[]
+
+HTTP Response
+include::{snippets}/token-generation-test/토큰_생성_성공/http-response.adoc[]
+
+Response Fields
+include::{snippets}/token-generation-test/토큰_생성_성공/response-fields.adoc[]
+
+== OAuth 서버 통신 에러
+
+HTTP Response
+include::{snippets}/token-generation-test/토큰_생성_실패/http-response.adoc[]

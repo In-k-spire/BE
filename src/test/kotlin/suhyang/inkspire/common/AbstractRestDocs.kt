@@ -23,16 +23,13 @@ import suhyang.inkspire.presentation.auth.AuthControllerTest
 
 
 @Disabled
-@WebMvcTest(AuthController::class)
 @Import(RestDocsConfig::class)
 @ExtendWith(RestDocumentationExtension::class)
-abstract class AbstractRestDocs {
+abstract class AbstractRestDocs: ControllerTest() {
 
     @Autowired
     protected lateinit var restDocs: RestDocumentationResultHandler;
 
-    @Autowired
-    protected lateinit var mockMvc: MockMvc;
 
     @BeforeEach
     fun setUp(context: WebApplicationContext?,

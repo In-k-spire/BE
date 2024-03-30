@@ -1,4 +1,4 @@
-package suhyang.inkspire.infrastructure.auth.config.properties
+package suhyang.inkspire.common.config.properties
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.bind.ConstructorBinding
@@ -17,6 +17,7 @@ data class OAuthProperties(
     data class GoogleProperties(
             val endPoint: String,
             val clientId: String,
+            val clientSecret: String,
             val scopes: List<String>,
             val accessType: String
     )

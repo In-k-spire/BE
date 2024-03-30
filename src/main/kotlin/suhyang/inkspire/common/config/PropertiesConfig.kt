@@ -1,8 +1,8 @@
-package suhyang.inkspire.infrastructure.auth.config
+package suhyang.inkspire.common.config
 
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration
-import suhyang.inkspire.infrastructure.auth.config.properties.OAuthProperties
+import suhyang.inkspire.common.config.properties.OAuthProperties
 
 @Configuration
 @EnableConfigurationProperties(

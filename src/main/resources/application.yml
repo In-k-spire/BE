@@ -3,8 +3,8 @@ spring:
     import: classpath:/env.yml
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    password: ${inkspire.mysql.password.mysql.password}
-    url: ${inkspire.mysql.url.mysql.url}
+    password: ${inkspire.mysql.password}
+    url: ${inkspire.mysql.url}
     username: ${inkspire.mysql.username}
   jpa:
     database: sql-server
@@ -21,10 +21,15 @@ oauth:
   github:
     end-point: ${oauth.github.end-point}
     clientId: ${oauth.github.clientId}
-    clientSecret: ${oauth.github.clientSecreta}
+    clientSecret: ${oauth.github.clientSecret}
   google:
     end-point: ${oauth.google.end-point}
     clientId:  ${oauth.google.clientId}
+    clientSecret: ${oauth.google.clientSecret}
     scopes: ${oauth.google.scopes}
     access-type: ${oauth.google.access-type}
+jwt:
+  secret-key: ${jwt.secretKey}
+  access-time: ${jwt.access-time}
+  refresh-time: ${jwt.refresh-time}
 

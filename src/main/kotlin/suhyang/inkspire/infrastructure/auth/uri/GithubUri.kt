@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Component
 import suhyang.inkspire.infrastructure.auth.annotation.OAuthProvider
 import suhyang.inkspire.infrastructure.auth.annotation.OAuthProviderType
-import suhyang.inkspire.infrastructure.auth.config.properties.OAuthProperties
+import suhyang.inkspire.common.config.properties.OAuthProperties
 
 @RequiredArgsConstructor
 @OAuthProvider(OAuthProviderType.GITHUB)
