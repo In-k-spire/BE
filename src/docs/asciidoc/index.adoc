@@ -4,3 +4,6 @@
 :toc: left
 :toclevels: 2
 :seclinks:
+:hardbreaks:
+
+include::auth.adoc[]
