@@ -41,3 +41,6 @@ out/
 
 .env
 env.yml
+
+### REST Docs ###
+/inkspire/src/main/resources/static/docs
