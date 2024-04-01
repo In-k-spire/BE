@@ -18,6 +18,11 @@ class AuthService(
         return tokenGenerator.generateAccessAndRefreshToken(user.id);
     }
 
+    fun reIssueAccessToken(refreshToken: String): String {
+        val id = tokenProvider.getSubject(refreshToken);
+        return tokenProvider.createAccessToken(id);
+    }
+
     fun extractId(accessToken: String): String = tokenProvider.getSubject(accessToken);
 
 }

@@ -21,5 +21,7 @@ class AuthFixturesAndDocs {
         fun JWT_토큰_응답(): AuthResponse.JwtTokenResponse = AuthResponse.JwtTokenResponse(엑세스_토큰, 리프레쉬_토큰);
 
         fun OAuth_유저(): OAuthUser = OAuthUser(OAUTH_유저_ID, OAUTH_유저_NAME);
+
+        fun 엑세스_토큰_재발급_요청(): AuthRequest.ReissueRequest = AuthRequest.ReissueRequest(리프레쉬_토큰);
     }
 }

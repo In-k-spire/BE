@@ -26,18 +26,28 @@ class AuthController(
     fun generateUri(
             @PathVariable provider: String,
             @RequestParam redirectUri: String
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<AuthResponse.URIResponse> {
         val uri: String = oAuthUri.generate(provider, redirectUri);
-        return ResponseEntity.ok(uri);
+        return ResponseEntity.ok(AuthResponse.URIResponse(uri = uri));
     }
 
     @PostMapping("/{provider}/token")
     fun generateToken(
             @PathVariable provider: String,
             @RequestBody tokenRequest: AuthRequest.TokenRequest
-    ): AuthResponse.JwtTokenResponse {
+    ): ResponseEntity<AuthResponse.JwtTokenResponse> {
         val oAuthUser: OAuthUser = oAuthClient.get(provider, tokenRequest.authorizationCode, tokenRequest.redirectUri);
-        return authService.generateJwtToken(oAuthUser);
+        return ResponseEntity.ok(authService.generateJwtToken(oAuthUser));
+    }
+
+    @PatchMapping("/reissue/token")
+    fun reissueToken(
+            @RequestBody reissueRequest: AuthRequest.ReissueRequest
+    ):ResponseEntity<AuthResponse.ReissuedTokenResponse> {
+        val reissuedTokenResponse = AuthResponse.ReissuedTokenResponse(
+                accessToken =  authService.reIssueAccessToken(reissueRequest.refreshToken)
+        );
+        return ResponseEntity.ok(reissuedTokenResponse);
     }
 
 }
