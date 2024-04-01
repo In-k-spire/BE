@@ -1,10 +1,16 @@
 package suhyang.inkspire.infrastructure.auth.dto
 
-data class AuthResponse(
-        val jwtTokenResponse: JwtTokenResponse
-) {
+class AuthResponse {
     data class JwtTokenResponse(
             val accessToken: String,
             val refreshToken: String
+    )
+
+    data class ReissuedTokenResponse(
+            val accessToken: String
+    )
+
+    data class URIResponse(
+            val uri: String
     )
 }

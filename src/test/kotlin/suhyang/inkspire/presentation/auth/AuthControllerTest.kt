@@ -9,8 +9,7 @@ import org.mockito.BDDMockito.given
 import org.mockito.Mockito.doThrow
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
-import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 import org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessRequest
 import org.springframework.restdocs.operation.preprocess.Preprocessors.preprocessResponse
 import org.springframework.restdocs.payload.JsonFieldType
@@ -28,7 +27,11 @@ import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAUTH_로그�
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAUTH_인증_코드
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAuth_유저
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.REDIRECT_URI
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.리프레쉬_토큰
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.엑세스_토큰
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.엑세스_토큰_재발급_요청
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
+import suhyang.inkspire.infrastructure.auth.exception.InvalidTokenException
 import suhyang.inkspire.infrastructure.auth.exception.OAuthException
 import suhyang.inkspire.infrastructure.auth.exception.ProviderNotFoundException
 
@@ -56,6 +59,11 @@ class AuthControllerTest(): AbstractRestDocs() {
                             queryParameters(
                                     parameterWithName("redirectUri")
                                             .description("OAuth redirect_uri")
+                            ),
+                            responseFields(
+                                    fieldWithPath("uri")
+                                            .type(JsonFieldType.STRING)
+                                            .description("OAuth 요청 URI")
                             )
                     ))
         }
@@ -159,6 +167,59 @@ class AuthControllerTest(): AbstractRestDocs() {
                     ))
         }
 
+    }
+
+    @Nested
+    @DisplayName("refreshToken으로 accessToken을 재발급한다.")
+    inner class ReissueTokenTest {
+
+        @Test
+        @DisplayName("성공")
+        fun 엑세스_토큰_재발급_성공() {
+            given(authService.reIssueAccessToken(리프레쉬_토큰))
+                    .willReturn(엑세스_토큰);
+
+            mockMvc.perform(patch("/api/auth/reissue/token")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(toJson(엑세스_토큰_재발급_요청()))
+            )
+                    .andExpect(status().isOk())
+                    .andDo(restDocs.document(
+                            requestFields(
+                                    fieldWithPath("refreshToken")
+                                            .type(JsonFieldType.STRING)
+                                            .description("리프레쉬 토큰")
+                            ),
+                            responseFields(
+                                    fieldWithPath("accessToken")
+                                            .type(JsonFieldType.STRING)
+                                            .description("재발급된 엑세스 토큰")
+                            )
+                    ))
+        }
+
+        @Test
+        @DisplayName("실패")
+        fun 엑세스_토큰_재발급_실패() {
+           doThrow(InvalidTokenException())
+                   .`when`(authService)
+                   .reIssueAccessToken(리프레쉬_토큰)
+
+            mockMvc.perform(patch("/api/auth/reissue/token")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(toJson(엑세스_토큰_재발급_요청()))
+            )
+                    .andExpect(status().isUnauthorized())
+                    .andDo(restDocs.document(
+                            requestFields(
+                                    fieldWithPath("refreshToken")
+                                            .type(JsonFieldType.STRING)
+                                            .description("리프레쉬 토큰")
+                            )
+                    ))
+        }
     }
 
 }
