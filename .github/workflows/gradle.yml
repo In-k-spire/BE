@@ -30,11 +30,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Make application.yml
-          run: |
-            cd ./src/main/resources
-            touch ./env.yml
-            echo "${{ secrets.ENV_YML }}" > ./env.yml
-          shell: bash
+        run: |
+          cd ./src/main/resources
+          touch ./env.yml
+          echo "${{ secrets.ENV_YML }}" > ./env.yml
+        shell: bash
 
       ## gradle build
       - name: Build with Gradle
