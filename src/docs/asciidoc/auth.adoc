@@ -41,3 +41,22 @@ include::{snippets}/token-generation-test/토큰_생성_성공/response-fields.a
 
 HTTP Response
 include::{snippets}/token-generation-test/토큰_생성_실패/http-response.adoc[]
+
+== 엑세스 토큰 재발급 요청
+
+HTTP Request
+include::{snippets}/reissue-token-test/엑세스_토큰_재발급_성공/http-request.adoc[]
+
+Request Fields
+include::{snippets}/reissue-token-test/엑세스_토큰_재발급_성공/request-fields.adoc[]
+
+HTTP Response
+include::{snippets}/reissue-token-test/엑세스_토큰_재발급_성공/http-response.adoc[]
+
+Response Fields
+include::{snippets}/reissue-token-test/엑세스_토큰_재발급_성공/response-fields.adoc[]
+
+== 잘못된 토큰 요청
+
+HTTP Response
+include::{snippets}/reissue-token-test/엑세스_토큰_재발급_실패/http-response.adoc[]
