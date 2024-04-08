@@ -45,14 +45,14 @@ class CategoryController(
             @AuthenticationPrincipal loginUser: User,
             @PathVariable categoryId: Long
     ): ResponseEntity<CategoryResponseDto.CategoryResponse> {
-        val categoryResponse = categoryService.getOne(loginUser.id, categoryId);
+        val categoryResponse = categoryService.getOne(categoryId);
         return ResponseEntity.ok(categoryResponse);
     }
 
-    @GetMapping()
+    @GetMapping
     fun getAllCategory(
             @AuthenticationPrincipal loginUser: User
-    ) : ResponseEntity<CategoryResponseDto.CategoryResponseList> {
+    ) : ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
         val categoryResponseList = categoryService.getList(loginUser.id);
         return ResponseEntity.ok(categoryResponseList);
     }
