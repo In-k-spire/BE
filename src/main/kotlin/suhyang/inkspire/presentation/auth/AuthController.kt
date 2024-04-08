@@ -11,7 +11,7 @@ import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.infrastructure.auth.dto.AuthRequest
 import suhyang.inkspire.infrastructure.auth.dto.AuthResponse
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
-import suhyang.inkspire.presentation.auth.principal.AuthenticationPrincipal
+import suhyang.inkspire.presentation.common.principal.AuthenticationPrincipal
 
 @RestController
 @RequestMapping("/api/auth")

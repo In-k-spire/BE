@@ -1,4 +1,4 @@
-package suhyang.inkspire.presentation.auth.principal
+package suhyang.inkspire.presentation.common.principal
 
 import jakarta.servlet.http.HttpServletRequest
 import lombok.RequiredArgsConstructor

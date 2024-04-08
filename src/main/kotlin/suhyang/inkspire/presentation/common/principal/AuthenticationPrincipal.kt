@@ -1,4 +1,4 @@
-package suhyang.inkspire.presentation.auth.principal
+package suhyang.inkspire.presentation.common.principal
 
 import java.lang.annotation.RetentionPolicy
 
