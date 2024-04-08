@@ -1,11 +1,12 @@
 package suhyang.inkspire.application.category
 
-import jakarta.transaction.Transactional
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.category.CategoryRepository
 import suhyang.inkspire.domain.user.UserRepository
+import suhyang.inkspire.infrastructure.book.dto.BookResponseDto
 import suhyang.inkspire.infrastructure.category.dto.CategoryRequest
 import suhyang.inkspire.infrastructure.category.dto.CategoryResponseDto
 
@@ -39,23 +40,19 @@ class CategoryService(
 
     @Transactional
     fun getOne(
-            userId: String,
             categoryId: Long
     ): CategoryResponseDto.CategoryResponse {
-        val user = userRepository.getUser(userId);
         val category = categoryRepository.findById(categoryId);
-        return CategoryResponseDto.CategoryResponse(category);
+        val bookListResponse = category.bookList.map { BookResponseDto.BookResponse(it) };
+        return CategoryResponseDto.CategoryResponse(category, bookListResponse);
     }
 
     @Transactional
     fun getList(
             userId: String,
-    ): CategoryResponseDto.CategoryResponseList {
+    ): List<CategoryResponseDto.CategoryResponse> {
         val user = userRepository.getUser(userId);
         val categoryList: List<Category> = categoryRepository.findByUser(user);
-        return CategoryResponseDto.CategoryResponseList(
-                categoryList
-                        .map { CategoryResponseDto.CategoryResponse(it) }
-        )
+        return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.map {book -> BookResponseDto.BookResponse(book)}) };
     }
 }

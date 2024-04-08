@@ -1,6 +1,7 @@
 package suhyang.inkspire.domain.category
 
 import jakarta.persistence.*
+import suhyang.inkspire.domain.book.Book
 import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.infrastructure.user.exception.DifferentUserException
 
@@ -19,6 +20,9 @@ class Category (
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_id")
         var user: User,
+
+        @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+        var bookList: MutableList<Book> = ArrayList<Book>()
 ) {
         fun validateHasSameUser(loginUser: User) {
                 if(this.user != loginUser) {
@@ -28,5 +32,9 @@ class Category (
 
         fun updateName(name: String) {
                 this.name = name;
+        }
+
+        fun addBook(book: Book) {
+                this.bookList.add(book);
         }
 }
