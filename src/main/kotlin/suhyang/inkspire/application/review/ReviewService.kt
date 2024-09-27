@@ -1,0 +1,34 @@
+package suhyang.inkspire.application.review
+
+import lombok.RequiredArgsConstructor
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+import suhyang.inkspire.domain.book.Book
+import suhyang.inkspire.domain.book.BookRepository
+import suhyang.inkspire.domain.review.Review
+import suhyang.inkspire.domain.review.ReviewRepository
+import suhyang.inkspire.infrastructure.review.dto.ReviewRequestDto
+
+@RequiredArgsConstructor
+@Transactional
+@Service
+class ReviewService(
+        private val bookRepository: BookRepository,
+        private val reviewRepository: ReviewRepository
+) {
+
+    fun write(
+            userId: String,
+            reviewCreateRequest: ReviewRequestDto.ReviewCreateRequest
+    ) {
+        val book:Book = bookRepository.getOneBook(reviewCreateRequest.bookId);
+        val review: Review = Review(
+                startPage = reviewCreateRequest.startPage,
+                endPage = reviewCreateRequest.endPage,
+                content = reviewCreateRequest.content,
+                book = book
+        );
+        book.addReview(review);
+        reviewRepository.save(review);
+    }
+}
