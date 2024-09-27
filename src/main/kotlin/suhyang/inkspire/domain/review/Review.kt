@@ -18,6 +18,9 @@ class Review(
         @Column(name = "end_page")
         val endPage: Int,
 
+        @Column(name = "one_line_reivew", length = 100)
+        val oneLineReview: String,
+
         @Column(name = "content", length = 10000)
         val content: String,
 
