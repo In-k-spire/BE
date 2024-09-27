@@ -27,7 +27,6 @@ class AuthenticationPrincipalArgumentResolver(
         val request: HttpServletRequest = webRequest.getNativeRequest(HttpServletRequest::class.java)!!;
         val accessToken: String = BearerExtractor.extract(request);
         val id: String = authService.extractId(accessToken);
-        println(id)
         return userRepository.getUser(id);
     }
 }
