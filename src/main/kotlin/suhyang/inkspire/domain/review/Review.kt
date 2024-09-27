@@ -13,20 +13,26 @@ class Review(
         val id: Long = 0,
 
         @Column(name = "start_page")
-        val startPage: Int,
+        var startPage: Int,
 
         @Column(name = "end_page")
-        val endPage: Int,
+        var endPage: Int,
 
         @Column(name = "one_line_reivew", length = 100)
-        val oneLineReview: String,
+        var oneLineReview: String,
 
         @Column(name = "content", length = 10000)
-        val content: String,
+        var content: String,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "book_id")
         var book: Book,
 
 ) {
+        fun update(startPage: Int, endPage: Int, oneLineReview: String, content: String): Unit {
+                this.startPage = startPage;
+                this.endPage = endPage;
+                this.oneLineReview = oneLineReview;
+                this.content = content;
+        }
 }

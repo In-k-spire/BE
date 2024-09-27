@@ -39,4 +39,17 @@ class ReviewService(
         val reviewList: List<Review> = reviewRepository.getListByBook(book);
         return reviewList.map {it -> ReviewResponseDto.ReviewResponse(it) }
     }
+
+    fun update(
+            reviewId: Long,
+            reviewUpdateRequest: ReviewRequestDto.ReviewUpdateRequest
+    ): Unit {
+        val review: Review = reviewRepository.getOneById(reviewId);
+        review.update(
+                reviewUpdateRequest.startPage,
+                reviewUpdateRequest.endPage,
+                reviewUpdateRequest.oneLineReview,
+                reviewUpdateRequest.content
+        );
+    }
 }
