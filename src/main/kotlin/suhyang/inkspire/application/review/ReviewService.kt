@@ -25,6 +25,7 @@ class ReviewService(
         val review: Review = Review(
                 startPage = reviewCreateRequest.startPage,
                 endPage = reviewCreateRequest.endPage,
+                oneLineReview = reviewCreateRequest.oneLineReview,
                 content = reviewCreateRequest.content,
                 book = book
         );
