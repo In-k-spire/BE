@@ -8,6 +8,7 @@ import suhyang.inkspire.domain.book.BookRepository
 import suhyang.inkspire.domain.review.Review
 import suhyang.inkspire.domain.review.ReviewRepository
 import suhyang.inkspire.infrastructure.review.dto.ReviewRequestDto
+import suhyang.inkspire.infrastructure.review.dto.ReviewResponseDto
 
 @RequiredArgsConstructor
 @Transactional
@@ -31,5 +32,11 @@ class ReviewService(
         );
         book.addReview(review);
         reviewRepository.save(review);
+    }
+
+    fun getList(bookId: Long): List<ReviewResponseDto.ReviewResponse> {
+        val book: Book = bookRepository.getOneBook(bookId);
+        val reviewList: List<Review> = reviewRepository.getListByBook(book);
+        return reviewList.map {it -> ReviewResponseDto.ReviewResponse(it) }
     }
 }
