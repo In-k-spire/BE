@@ -25,4 +25,8 @@ class ReviewRepositoryImpl(
         return reviewJpaRepository.findByBook(book);
     }
 
+    override fun delete(review: Review) {
+        reviewJpaRepository.delete(review);
+    }
+
 }

@@ -56,6 +56,12 @@ dependencies {
 	runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 }
 
+allOpen {
+	annotation("jakarta.persistence.Entity")
+	annotation("jakarta.persistence.Embeddable")
+	annotation("jakarta.persistence.MappedSuperclass")
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }

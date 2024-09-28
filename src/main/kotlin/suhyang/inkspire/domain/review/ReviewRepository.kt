@@ -7,5 +7,6 @@ interface ReviewRepository {
     fun save(review: Review): Unit;
     fun getOneById(reviewId: Long): Review;
     fun getListByBook(book: Book): List<Review>;
+    fun delete(review: Review): Unit;
 
 }

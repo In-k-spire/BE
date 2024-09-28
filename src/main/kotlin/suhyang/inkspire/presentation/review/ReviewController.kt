@@ -45,4 +45,13 @@ class ReviewController(
         reviewService.update(reviewId, reviewUpdateRequest);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{reviewId}")
+    fun deleteReview(
+            @AuthenticationPrincipal loginUser: User,
+            @PathVariable reviewId: Long
+    ): ResponseEntity<Unit> {
+        reviewService.delete(reviewId);
+        return ResponseEntity.ok().build();
+    }
 }

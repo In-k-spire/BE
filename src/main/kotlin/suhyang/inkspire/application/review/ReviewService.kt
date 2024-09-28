@@ -52,4 +52,11 @@ class ReviewService(
                 reviewUpdateRequest.content
         );
     }
+
+    fun delete(
+            reviewId: Long
+    ): Unit {
+        val review: Review = reviewRepository.getOneById(reviewId);
+        reviewRepository.delete(review);
+    }
 }
