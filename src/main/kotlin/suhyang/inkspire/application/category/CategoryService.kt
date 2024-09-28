@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.category.CategoryRepository
+import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.domain.user.UserRepository
 import suhyang.inkspire.infrastructure.book.dto.BookResponseDto
 import suhyang.inkspire.infrastructure.category.dto.CategoryRequest
@@ -49,9 +50,8 @@ class CategoryService(
 
     @Transactional
     fun getList(
-            userId: String,
+            user: User
     ): List<CategoryResponseDto.CategoryResponse> {
-        val user = userRepository.getUser(userId);
         val categoryList: List<Category> = categoryRepository.findByUser(user);
         return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.map {book -> BookResponseDto.BookResponse(book)}) };
     }
