@@ -10,7 +10,7 @@ spring:
     database: sql-server
     generate-ddl: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     open-in-view: false
     properties:
       hibernate:
