@@ -2,6 +2,7 @@ package suhyang.inkspire.domain.book
 
 import jakarta.persistence.*
 import suhyang.inkspire.domain.category.Category
+import suhyang.inkspire.domain.review.Review
 import suhyang.inkspire.domain.user.User
 
 @Entity
@@ -33,8 +34,15 @@ class Book(
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "category_id")
-        var category: Category
+        var category: Category,
+
+        @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+        var reviewList: MutableList<Review> = ArrayList<Review>()
 
         ) {
+
+        fun addReview(review: Review): Unit {
+                this.reviewList.add(review);
+        }
 
 }

@@ -53,7 +53,7 @@ class CategoryController(
     fun getAllCategory(
             @AuthenticationPrincipal loginUser: User
     ) : ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
-        val categoryResponseList = categoryService.getList(loginUser.id);
+        val categoryResponseList = categoryService.getList(loginUser);
         return ResponseEntity.ok(categoryResponseList);
     }
 }
