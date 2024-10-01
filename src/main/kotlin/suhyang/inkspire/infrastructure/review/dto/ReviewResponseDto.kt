@@ -20,4 +20,9 @@ class ReviewResponseDto {
             val month: Int,
             val count: Int
     )
+
+    data class WeeklyReviewCountResponse(
+            val dayNumber: Int,
+            val count: Int
+    )
 }

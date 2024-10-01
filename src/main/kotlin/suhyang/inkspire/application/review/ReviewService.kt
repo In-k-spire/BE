@@ -12,6 +12,7 @@ import suhyang.inkspire.domain.user.UserRepository
 import suhyang.inkspire.infrastructure.review.dto.ReviewRequestDto
 import suhyang.inkspire.infrastructure.review.dto.ReviewResponseDto
 import suhyang.inkspire.infrastructure.review.projections.MonthlyReviewCountProjection
+import suhyang.inkspire.infrastructure.review.projections.WeeklyReviewCountProjection
 
 @RequiredArgsConstructor
 @Transactional
@@ -73,5 +74,10 @@ class ReviewService(
     ): List<ReviewResponseDto.MonthlyReviewCountResponse> {
         val monthlyReviewCounts: List<MonthlyReviewCountProjection> = reviewRepository.getMonthlyReviewCounts(userId, year);
         return monthlyReviewCounts.map {it -> ReviewResponseDto.MonthlyReviewCountResponse(it.getMonth(), it.getReviewCount())};
+    }
+
+    fun getWeekly(userId: String): List<ReviewResponseDto.WeeklyReviewCountResponse> {
+        val weeklyReviewCounts: List<WeeklyReviewCountProjection> = reviewRepository.getWeeklyReviewCounts(userId);
+        return weeklyReviewCounts.map {it -> ReviewResponseDto.WeeklyReviewCountResponse(it.getDayNumber(), it.getReviewCount())};
     }
 }

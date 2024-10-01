@@ -64,4 +64,12 @@ class ReviewController(
         val monthlyReview = reviewService.getMonthly(loginUser.id, year);
         return ResponseEntity.ok(monthlyReview);
     }
+
+    @GetMapping("/week")
+    fun getWeeklyReviewCounts(
+            @AuthenticationPrincipal loginUser: User
+    ): ResponseEntity<List<ReviewResponseDto.WeeklyReviewCountResponse>> {
+        val weeklyReview = reviewService.getWeekly(loginUser.id);
+        return ResponseEntity.ok(weeklyReview);
+    }
 }
