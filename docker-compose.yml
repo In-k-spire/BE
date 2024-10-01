@@ -17,8 +17,8 @@ services:
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   inkspire-database:
-    image: mysql:8.0
-    container_name: tool_mysql
+    image: mysql:lastest
+    container_name: inkspire_mysql
     environment:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_USER: ${DB_USERNAME}
@@ -45,7 +45,7 @@ services:
     environment:
       TZ: Asia/Seoul
     volumes:
-      - /home/suhyang419/images:/app/files
+      - /home/s0u4u1u9/images:/app/files
   certbot:
     image: certbot/certbot
     container_name: certbot_service
