@@ -2,6 +2,7 @@ package suhyang.inkspire.presentation.review
 
 import jakarta.websocket.server.PathParam
 import lombok.RequiredArgsConstructor
+import org.apache.catalina.mbeans.UserMBean
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import suhyang.inkspire.application.review.ReviewService
@@ -53,5 +54,22 @@ class ReviewController(
     ): ResponseEntity<Unit> {
         reviewService.delete(reviewId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/month")
+    fun getMonthlyReviewCounts(
+            @AuthenticationPrincipal loginUser: User,
+            @RequestParam year: Int
+    ): ResponseEntity<List<ReviewResponseDto.MonthlyReviewCountResponse>> {
+        val monthlyReview = reviewService.getMonthly(loginUser.id, year);
+        return ResponseEntity.ok(monthlyReview);
+    }
+
+    @GetMapping("/week")
+    fun getWeeklyReviewCounts(
+            @AuthenticationPrincipal loginUser: User
+    ): ResponseEntity<List<ReviewResponseDto.WeeklyReviewCountResponse>> {
+        val weeklyReview = reviewService.getWeekly(loginUser.id);
+        return ResponseEntity.ok(weeklyReview);
     }
 }

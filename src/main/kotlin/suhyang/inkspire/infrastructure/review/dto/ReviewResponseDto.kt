@@ -15,4 +15,14 @@ class ReviewResponseDto {
                 oneLineReview = review.oneLineReview,
                 content = review.content)
     }
+
+    data class MonthlyReviewCountResponse(
+            val month: Int,
+            val count: Int
+    )
+
+    data class WeeklyReviewCountResponse(
+            val dayNumber: Int,
+            val count: Int
+    )
 }
