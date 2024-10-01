@@ -17,7 +17,7 @@ services:
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   inkspire-database:
-    image: mysql:lastest
+    image: mysql:latest
     container_name: inkspire_mysql
     environment:
       MYSQL_DATABASE: ${DB_NAME}
