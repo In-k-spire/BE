@@ -11,7 +11,7 @@ enum class OAuthProviderType(
     GITHUB("github");
 
     fun isSameProvider(provider: String): Boolean {
-        return this.provider.equals(provider);
+        return this.provider == provider;
     }
 
 }
