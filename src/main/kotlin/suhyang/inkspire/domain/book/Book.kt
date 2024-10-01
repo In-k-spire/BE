@@ -1,6 +1,7 @@
 package suhyang.inkspire.domain.book
 
 import jakarta.persistence.*
+import suhyang.inkspire.common.entity.BaseTimeEntity
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.review.Review
 import suhyang.inkspire.domain.user.User
@@ -39,7 +40,7 @@ class Book(
         @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
         var reviewList: MutableList<Review> = ArrayList<Review>()
 
-        ) {
+        ): BaseTimeEntity() {
 
         fun addReview(review: Review): Unit {
                 this.reviewList.add(review);

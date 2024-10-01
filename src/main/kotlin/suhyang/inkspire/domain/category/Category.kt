@@ -1,6 +1,7 @@
 package suhyang.inkspire.domain.category
 
 import jakarta.persistence.*
+import suhyang.inkspire.common.entity.BaseTimeEntity
 import suhyang.inkspire.domain.book.Book
 import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.infrastructure.user.exception.DifferentUserException
@@ -23,7 +24,7 @@ class Category (
 
         @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
         var bookList: MutableList<Book> = ArrayList<Book>()
-) {
+): BaseTimeEntity() {
         fun validateHasSameUser(loginUser: User) {
                 if(this.user != loginUser) {
                    throw DifferentUserException()
