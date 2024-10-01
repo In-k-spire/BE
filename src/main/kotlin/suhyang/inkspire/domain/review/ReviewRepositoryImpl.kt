@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component
 import suhyang.inkspire.domain.book.Book
 import suhyang.inkspire.infrastructure.review.ReviewJpaRepository
 import suhyang.inkspire.infrastructure.review.exception.ReviewNotFoundException
+import suhyang.inkspire.infrastructure.review.projections.MonthlyReviewCountProjection
 
 @RequiredArgsConstructor
 @Component
@@ -28,5 +29,10 @@ class ReviewRepositoryImpl(
     override fun delete(review: Review) {
         reviewJpaRepository.delete(review);
     }
+
+    override fun getMonthlyReviewCounts(userId: String, year: Int): List<MonthlyReviewCountProjection> {
+        return reviewJpaRepository.findMonthlyReviewCountsNative(userId, year);
+    }
+
 
 }

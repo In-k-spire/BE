@@ -1,6 +1,7 @@
 package suhyang.inkspire.domain.user
 
 import jakarta.persistence.*
+import suhyang.inkspire.common.entity.BaseTimeEntity
 import suhyang.inkspire.domain.book.Book
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.review.Review
@@ -25,7 +26,7 @@ class User (
         @OneToMany(mappedBy = "user")
         var reviewList: MutableList<Review> = ArrayList<Review>(),
 
-) {
+): BaseTimeEntity() {
         fun addCategory(category: Category) {
                 this.categoryList.add(category)
         }

@@ -11,6 +11,7 @@ import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.domain.user.UserRepository
 import suhyang.inkspire.infrastructure.review.dto.ReviewRequestDto
 import suhyang.inkspire.infrastructure.review.dto.ReviewResponseDto
+import suhyang.inkspire.infrastructure.review.projections.MonthlyReviewCountProjection
 
 @RequiredArgsConstructor
 @Transactional
@@ -64,5 +65,13 @@ class ReviewService(
     ): Unit {
         val review: Review = reviewRepository.getOneById(reviewId);
         reviewRepository.delete(review);
+    }
+
+    fun getMonthly(
+            userId: String,
+            year: Int
+    ): List<ReviewResponseDto.MonthlyReviewCountResponse> {
+        val monthlyReviewCounts: List<MonthlyReviewCountProjection> = reviewRepository.getMonthlyReviewCounts(userId, year);
+        return monthlyReviewCounts.map {it -> ReviewResponseDto.MonthlyReviewCountResponse(it.getMonth(), it.getReviewCount())};
     }
 }
