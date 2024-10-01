@@ -33,7 +33,6 @@ class GoogleOAuthClient(
                 clientSecret = oAuthProperties.google.clientSecret,
                 code = URLDecoder.decode(authorizationCode, StandardCharsets.UTF_8),
                 redirectUri = redirectUri)
-        println(tokenRequest.toString());
         try {
             return googleTokenClient.get(tokenRequest);
         } catch(e: RestClientException) {

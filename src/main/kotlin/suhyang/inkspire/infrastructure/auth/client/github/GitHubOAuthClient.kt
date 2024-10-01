@@ -33,7 +33,6 @@ class GitHubOAuthClient(
                     clientSecret = oAuthProperties.github.clientSecret,
                     code = authorizationCode
             );
-            println(extractAccessToken(responseData));
             return extractAccessToken(responseData);
         } catch(e: RestClientException) {
             throw OAuthException();
