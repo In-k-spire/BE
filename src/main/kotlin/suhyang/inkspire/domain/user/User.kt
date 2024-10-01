@@ -3,6 +3,7 @@ package suhyang.inkspire.domain.user
 import jakarta.persistence.*
 import suhyang.inkspire.domain.book.Book
 import suhyang.inkspire.domain.category.Category
+import suhyang.inkspire.domain.review.Review
 
 @Entity
 @Table(name = "tbl_user")
@@ -19,7 +20,10 @@ class User (
         var categoryList: MutableList<Category> = ArrayList<Category>(),
 
         @OneToMany(mappedBy = "user")
-        var bookList: MutableList<Book> = ArrayList<Book>()
+        var bookList: MutableList<Book> = ArrayList<Book>(),
+
+        @OneToMany(mappedBy = "user")
+        var reviewList: MutableList<Review> = ArrayList<Review>(),
 
 ) {
         fun addCategory(category: Category) {
@@ -28,5 +32,9 @@ class User (
 
         fun addBook(book: Book) {
                 this.bookList.add(book);
+        }
+
+        fun addReview(review: Review) {
+                this.reviewList.add(review);
         }
 }
