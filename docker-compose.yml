@@ -44,7 +44,7 @@ services:
     environment:
       TZ: Asia/Seoul
     volumes:
-      - /home/suhyang419/images:/app/files
+      - /home/s0u4u1u9/images:/app/files
   certbot:
     image: certbot/certbot
     container_name: certbot_service
