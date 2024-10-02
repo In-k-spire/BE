@@ -5,6 +5,7 @@ class BookRequestDto {
             val title: String,
             val description: String,
             val author: String,
+            val publisher: String,
             val link: String,
             val image: String,
             val categoryId: Long

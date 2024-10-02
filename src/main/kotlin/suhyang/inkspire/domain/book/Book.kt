@@ -23,6 +23,9 @@ class Book(
         @Column(name = "book_author")
         val author: String,
 
+        @Column(name = "book_publisher")
+        val publisher: String,
+
         @Column(name = "book_shopping_link")
         val link: String,
 
