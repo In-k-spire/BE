@@ -1,19 +1,23 @@
 package suhyang.inkspire.infrastructure.review.dto
 
 import suhyang.inkspire.domain.review.Review
+import java.time.LocalDateTime
 
 class ReviewResponseDto {
     data class ReviewResponse(
             val startPage: Int,
             val endPage: Int,
             val oneLineReview: String,
-            val content: String
+            val content: String,
+            val lastModifiedAt: LocalDateTime,
     ) {
         constructor(review: Review): this(
                 startPage = review.startPage,
                 endPage = review.endPage,
                 oneLineReview = review.oneLineReview,
-                content = review.content)
+                content = review.content,
+                lastModifiedAt = review.modifiedAt!!,
+        )
     }
 
     data class MonthlyReviewCountResponse(
