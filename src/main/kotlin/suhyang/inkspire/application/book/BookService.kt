@@ -30,6 +30,7 @@ class BookService(
                 title = bookCreateRequest.title,
                 description = bookCreateRequest.description,
                 author = bookCreateRequest.author,
+                publisher = bookCreateRequest.publisher,
                 link = bookCreateRequest.link,
                 image = bookCreateRequest.image,
                 user = user,

@@ -7,14 +7,16 @@ class BookResponseDto {
             val title: String,
             val description: String,
             val author: String,
-            val shoppingLink: String,
-            val imageLink: String
+            val publisher: String,
+            val link: String,
+            val image: String
     ) {
         constructor(book: Book)
         : this(title = book.title,
                 description = book.description,
                 author = book.author,
-                shoppingLink = book.link,
-                imageLink = book.image)
+                publisher = book.publisher,
+                link = book.link,
+                image = book.image)
     }
 }
