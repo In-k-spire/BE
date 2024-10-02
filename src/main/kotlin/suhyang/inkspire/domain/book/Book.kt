@@ -24,10 +24,10 @@ class Book(
         val author: String,
 
         @Column(name = "book_shopping_link")
-        val shoppingLink: String,
+        val link: String,
 
         @Column(name = "book_image_link")
-        val imageLink: String,
+        val image: String,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "user_id")

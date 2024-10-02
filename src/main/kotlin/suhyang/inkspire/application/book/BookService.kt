@@ -30,8 +30,8 @@ class BookService(
                 title = bookCreateRequest.title,
                 description = bookCreateRequest.description,
                 author = bookCreateRequest.author,
-                shoppingLink = bookCreateRequest.shoppingLink,
-                imageLink = bookCreateRequest.imageLink,
+                link = bookCreateRequest.link,
+                image = bookCreateRequest.image,
                 user = user,
                 category = category
         );
