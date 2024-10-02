@@ -4,6 +4,7 @@ import suhyang.inkspire.domain.book.Book
 
 class BookResponseDto {
     data class BookResponse (
+            val id: Long,
             val title: String,
             val description: String,
             val author: String,
@@ -12,7 +13,8 @@ class BookResponseDto {
             val image: String
     ) {
         constructor(book: Book)
-        : this(title = book.title,
+        : this(id = book.id,
+                title = book.title,
                 description = book.description,
                 author = book.author,
                 publisher = book.publisher,
