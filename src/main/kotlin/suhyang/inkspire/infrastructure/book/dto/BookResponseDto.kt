@@ -14,7 +14,7 @@ class BookResponseDto {
         : this(title = book.title,
                 description = book.description,
                 author = book.author,
-                shoppingLink = book.shoppingLink,
-                imageLink = book.imageLink)
+                shoppingLink = book.link,
+                imageLink = book.image)
     }
 }
