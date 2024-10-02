@@ -17,7 +17,7 @@ class Book(
         @Column(name = "book_title")
         val title: String,
 
-        @Column(name = "book_description")
+        @Column(name = "book_description", length = 5000)
         val description: String,
 
         @Column(name = "book_author")
