@@ -53,6 +53,6 @@ class CategoryService(
             user: User
     ): List<CategoryResponseDto.CategoryResponse> {
         val categoryList: List<Category> = categoryRepository.findByUser(user);
-        return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.take(10).map {book -> BookResponseDto.BookResponse(book)}) };
+        return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.take(5).map {book -> BookResponseDto.BookResponse(book)}) };
     }
 }
