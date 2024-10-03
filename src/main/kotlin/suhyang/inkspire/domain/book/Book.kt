@@ -38,6 +38,7 @@ class Book(
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "category_id")
+        @OrderBy("createAt DESC")
         var category: Category,
 
         @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
