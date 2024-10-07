@@ -6,4 +6,5 @@ interface CategoryRepository {
     fun saveCategory(category: Category): Category;
     fun findById(id: Long): Category
     fun findByUser(user: User): List<Category>;
+    fun delete(category: Category): Unit;
 }
