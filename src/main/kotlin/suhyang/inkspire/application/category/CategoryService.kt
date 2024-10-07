@@ -55,4 +55,14 @@ class CategoryService(
         val categoryList: List<Category> = categoryRepository.findByUser(user);
         return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.take(5).map {book -> BookResponseDto.BookResponse(book)}) };
     }
+
+    fun delete(
+            userId: String,
+            categoryId: Long
+    ): Unit {
+        val user: User = userRepository.getUser(userId);
+        val category: Category = categoryRepository.findById(categoryId);
+        category.validateHasSameUser(user);
+        categoryRepository.delete(category);
+    }
 }

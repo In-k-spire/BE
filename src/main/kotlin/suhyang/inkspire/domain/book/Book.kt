@@ -41,7 +41,7 @@ class Book(
         @OrderBy("createAt DESC")
         var category: Category,
 
-        @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "book", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
         var reviewList: MutableList<Review> = ArrayList<Review>()
 
         ): BaseTimeEntity() {

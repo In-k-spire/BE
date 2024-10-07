@@ -23,4 +23,10 @@ class CategoryRepositoryImpl(
     override fun findByUser(user: User): List<Category> {
         return categoryJpaRepository.findByUser(user);
     }
+
+    override fun delete(category: Category): Unit {
+        categoryJpaRepository.delete(category);
+    }
+
+
 }
