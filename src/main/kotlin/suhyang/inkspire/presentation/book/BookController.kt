@@ -2,6 +2,7 @@ package suhyang.inkspire.presentation.book
 
 import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -46,5 +47,14 @@ class BookController(
     ): ResponseEntity<List<BookResponseDto.BookResponse>> {
         val bookResponseList = bookService.getList(categoryId);
         return ResponseEntity.ok(bookResponseList);
+    }
+
+    @DeleteMapping("/{bookId}")
+    fun deleteBook(
+            @AuthenticationPrincipal loginUser: User,
+            @PathVariable bookId: Long
+    ): ResponseEntity<Unit> {
+        bookService.delete(loginUser.id, bookId);
+        return ResponseEntity.ok().build();
     }
 }

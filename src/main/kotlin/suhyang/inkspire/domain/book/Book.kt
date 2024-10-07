@@ -5,6 +5,7 @@ import suhyang.inkspire.common.entity.BaseTimeEntity
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.review.Review
 import suhyang.inkspire.domain.user.User
+import suhyang.inkspire.infrastructure.user.exception.DifferentUserException
 
 @Entity
 @Table(name = "tbl_book")
@@ -50,4 +51,10 @@ class Book(
                 this.reviewList.add(review);
         }
 
+        fun validateHasSameUser(loginUser: User) {
+                if(this.user != loginUser) {
+                        throw DifferentUserException()
+                }
+        }
 }
+

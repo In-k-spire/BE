@@ -52,4 +52,11 @@ class BookService(
         val bookList: List<Book> = bookRepository.getBookList(category);
         return bookList.map { BookResponseDto.BookResponse(it) };
     }
+
+    fun delete(userId: String, bookId: Long): Unit {
+        val user = userRepository.getUser(userId);
+        val book = bookRepository.getOneBook(bookId);
+        book.validateHasSameUser(user);
+        bookRepository.delete(book);
+    }
 }
