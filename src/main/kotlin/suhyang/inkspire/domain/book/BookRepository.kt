@@ -8,4 +8,5 @@ interface BookRepository {
     fun getOneBook(bookId: Long): Book;
     fun getBookList(user: User): List<Book>;
     fun getBookList(category: Category): List<Book>;
+    fun delete(book: Book): Unit;
 }

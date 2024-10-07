@@ -29,4 +29,8 @@ class BookRepositoryImpl(
         return bookJpaRepository.findByCategory(category);
     }
 
+    override fun delete(book: Book) {
+        bookJpaRepository.delete(book);
+    }
+
 }
