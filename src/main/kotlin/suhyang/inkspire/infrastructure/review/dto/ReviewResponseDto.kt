@@ -10,7 +10,7 @@ class ReviewResponseDto {
             val endPage: Int,
             val oneLineReview: String,
             val content: String,
-            val lastModifiedAt: LocalDateTime,
+            val createdAt: LocalDateTime,
     ) {
         constructor(review: Review): this(
                 reviewId = review.id,
@@ -18,7 +18,7 @@ class ReviewResponseDto {
                 endPage = review.endPage,
                 oneLineReview = review.oneLineReview,
                 content = review.content,
-                lastModifiedAt = review.modifiedAt!!,
+                createdAt = review.createdAt!!,
         )
     }
 
