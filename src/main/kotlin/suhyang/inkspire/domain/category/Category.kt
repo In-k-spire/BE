@@ -22,7 +22,7 @@ class Category (
         @JoinColumn(name = "user_id")
         var user: User,
 
-        @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+        @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = [CascadeType.REMOVE])
         var bookList: MutableList<Book> = ArrayList<Book>()
 ): BaseTimeEntity() {
         fun validateHasSameUser(loginUser: User) {

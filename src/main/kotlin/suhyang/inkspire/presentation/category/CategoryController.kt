@@ -2,6 +2,7 @@ package suhyang.inkspire.presentation.category
 
 import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -52,8 +53,17 @@ class CategoryController(
     @GetMapping
     fun getAllCategory(
             @AuthenticationPrincipal loginUser: User
-    ) : ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
+    ): ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
         val categoryResponseList = categoryService.getList(loginUser);
         return ResponseEntity.ok(categoryResponseList);
+    }
+
+    @DeleteMapping("/{categoryId}")
+    fun deleteCategory(
+            @AuthenticationPrincipal loginUser: User,
+            @PathVariable categoryId: Long
+    ): ResponseEntity<Unit> {
+        categoryService.delete(loginUser.id, categoryId);
+        return ResponseEntity.ok().build();
     }
 }
