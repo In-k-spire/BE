@@ -5,6 +5,7 @@ import java.time.LocalDateTime
 
 class ReviewResponseDto {
     data class ReviewResponse(
+            val reviewId: Long,
             val startPage: Int,
             val endPage: Int,
             val oneLineReview: String,
@@ -12,6 +13,7 @@ class ReviewResponseDto {
             val lastModifiedAt: LocalDateTime,
     ) {
         constructor(review: Review): this(
+                reviewId = review.id,
                 startPage = review.startPage,
                 endPage = review.endPage,
                 oneLineReview = review.oneLineReview,

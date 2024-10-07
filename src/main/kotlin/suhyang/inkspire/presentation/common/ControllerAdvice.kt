@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import suhyang.inkspire.common.exception.ForbiddenException
 import suhyang.inkspire.common.exception.InternalException
 import suhyang.inkspire.common.exception.NotFoundException
 import suhyang.inkspire.common.exception.UnauthorizedException
@@ -30,5 +31,11 @@ class ControllerAdvice {
     fun handelUnauthorizedException(e: UnauthorizedException): ResponseEntity<ErrorResponse> {
         val errorResponse: ErrorResponse = ErrorResponse(e.message!!);
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
+    }
+
+    @ExceptionHandler(ForbiddenException::class)
+    fun handleForbiddenException(e: ForbiddenException): ResponseEntity<ErrorResponse> {
+        val errorResponse: ErrorResponse = ErrorResponse(e.message!!);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
     }
 }
