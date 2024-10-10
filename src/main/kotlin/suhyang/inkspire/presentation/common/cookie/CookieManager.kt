@@ -1,4 +1,4 @@
-package suhyang.inkspire.presentation.common
+package suhyang.inkspire.presentation.common.cookie
 
 import org.springframework.http.ResponseCookie
 import org.springframework.stereotype.Component

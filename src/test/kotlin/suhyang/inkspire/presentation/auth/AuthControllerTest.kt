@@ -19,14 +19,17 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import suhyang.inkspire.application.auth.OAuthUri
 import suhyang.inkspire.common.AbstractRestDocs
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.COOKIE_NAME
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.GITHUB_PROVIDER
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.GOOGLE_PROVIDER
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.JWT_토큰_요청
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.JWT_토큰_응답
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.MAX_AGE
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAUTH_로그인_링크
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAUTH_인증_코드
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.OAuth_유저
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.REDIRECT_URI
+import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.RESPONSE_COOKIE_응답
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.리프레쉬_토큰
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.엑세스_토큰
 import suhyang.inkspire.fixture.auth.AuthFixturesAndDocs.Companion.엑세스_토큰_재발급_요청
@@ -105,6 +108,12 @@ class AuthControllerTest(): AbstractRestDocs() {
             given(authService.generateJwtToken(OAuth_유저()))
                     .willReturn(JWT_토큰_응답());
 
+            given(jwtTokenCookieGenerator.generateAccessTokenCookie(엑세스_토큰))
+                    .willReturn(RESPONSE_COOKIE_응답());
+
+            given(jwtTokenCookieGenerator.generateRefreshTokenCookie(리프레쉬_토큰))
+                    .willReturn(RESPONSE_COOKIE_응답());
+
             mockMvc.perform(post("/api/auth/{provider}/token", GOOGLE_PROVIDER)
                     .accept(MediaType.APPLICATION_JSON)
                     .contentType(MediaType.APPLICATION_JSON)
@@ -123,14 +132,6 @@ class AuthControllerTest(): AbstractRestDocs() {
                                     fieldWithPath("redirectUri")
                                             .type(JsonFieldType.STRING)
                                             .description("OAuth Redirect URI")
-                            ),
-                            responseFields(
-                                    fieldWithPath("accessToken")
-                                            .type(JsonFieldType.STRING)
-                                            .description("JWT Access Token"),
-                                    fieldWithPath("refreshToken")
-                                            .type(JsonFieldType.STRING)
-                                            .description("JWT Refresh Token")
                             )
                     ))
         }

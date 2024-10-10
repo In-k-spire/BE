@@ -1,7 +1,6 @@
 package suhyang.inkspire.presentation.auth
 
 import suhyang.inkspire.application.auth.OAuthUri
-import com.fasterxml.jackson.databind.SerializerProvider
 import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
@@ -10,12 +9,11 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import suhyang.inkspire.application.auth.AuthService
 import suhyang.inkspire.application.auth.OAuthClient
-import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.infrastructure.auth.dto.AuthRequest
 import suhyang.inkspire.infrastructure.auth.dto.AuthResponse
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
-import suhyang.inkspire.presentation.common.CookieManager
-import suhyang.inkspire.presentation.common.principal.AuthenticationPrincipal
+import suhyang.inkspire.presentation.common.cookie.CookieManager
+import suhyang.inkspire.presentation.common.cookie.JwtTokenCookieGenerator
 
 @RestController
 @RequestMapping("/api/auth")
@@ -24,9 +22,7 @@ class AuthController(
         private val oAuthUri: OAuthUri,
         private val oAuthClient: OAuthClient,
         private val authService: AuthService,
-        private val cookieManager: CookieManager,
-        @Value("\${jwt.cookie.access-time}") val accessTime: Long,
-        @Value("\${jwt.cookie.refresh-time}") val refreshTime: Long
+        private val jwtTokenCookieGenerator: JwtTokenCookieGenerator
 ) {
 
     @GetMapping("/{provider}/uri")
@@ -46,17 +42,9 @@ class AuthController(
         val oAuthUser: OAuthUser = oAuthClient.get(provider, tokenRequest.authorizationCode, tokenRequest.redirectUri);
         val jwtTokenResponse: AuthResponse.JwtTokenResponse = authService.generateJwtToken(oAuthUser);
 
-        val accessTokenCookie: ResponseCookie = cookieManager.generateCookie(
-                name = "accessToken",
-                value = jwtTokenResponse.accessToken,
-                maxAge = accessTime
-        );
+        val accessTokenCookie: ResponseCookie = jwtTokenCookieGenerator.generateAccessTokenCookie(jwtTokenResponse.accessToken);
 
-        val refreshTokenCookie: ResponseCookie = cookieManager.generateCookie(
-                name = "refreshToken",
-                value = jwtTokenResponse.refreshToken,
-                maxAge = refreshTime
-        );
+        val refreshTokenCookie: ResponseCookie = jwtTokenCookieGenerator.generateRefreshTokenCookie(jwtTokenResponse.refreshToken);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, accessTokenCookie.toString())
