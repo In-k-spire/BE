@@ -14,6 +14,7 @@ import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.domain.user.UserRepository
 import suhyang.inkspire.presentation.auth.AuthController
 import suhyang.inkspire.presentation.category.CategoryController
+import suhyang.inkspire.presentation.common.cookie.JwtTokenCookieGenerator
 
 
 @WebMvcTest(AuthController::class, CategoryController::class)
@@ -32,6 +33,9 @@ abstract class ControllerTest {
 
     @MockBean
     protected lateinit var authService: AuthService;
+
+    @MockBean
+    protected lateinit var jwtTokenCookieGenerator: JwtTokenCookieGenerator;
 
     @MockBean
     protected lateinit var categoryService: CategoryService;
