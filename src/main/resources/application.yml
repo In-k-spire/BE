@@ -32,4 +32,7 @@ jwt:
   secret-key: ${jwt.secretKey}
   access-time: ${jwt.access-time}
   refresh-time: ${jwt.refresh-time}
+  cookie:
+    access-time: ${jwt.cookie.access-time}
+    refresh-time: ${jwt.cookie.refresh-time}
 
