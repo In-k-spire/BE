@@ -8,6 +8,6 @@ import suhyang.inkspire.domain.user.User
 interface CategoryJpaRepository: JpaRepository<Category, Long> {
     @Query("select c from Category c left join fetch c.bookList left join fetch c.user where c.id = :id")
     fun findByIdOrNull(id: Long): Category?;
-    @Query("select c from Category c left join fetch c.bookList where c.user = :user")
+    @Query("select c from Category c where c.user = :user")
     fun findByUser(user: User): List<Category>;
 }
