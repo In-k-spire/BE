@@ -1,10 +1,11 @@
-package suhyang.inkspire.domain.review
+package suhyang.inkspire.infrastructure.review
 
 import lombok.RequiredArgsConstructor
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 import suhyang.inkspire.domain.book.Book
-import suhyang.inkspire.infrastructure.review.ReviewJpaRepository
+import suhyang.inkspire.domain.review.Review
+import suhyang.inkspire.domain.review.ReviewRepository
 import suhyang.inkspire.infrastructure.review.exception.ReviewNotFoundException
 import suhyang.inkspire.infrastructure.review.projections.MonthlyReviewCountProjection
 import suhyang.inkspire.infrastructure.review.projections.WeeklyReviewCountProjection

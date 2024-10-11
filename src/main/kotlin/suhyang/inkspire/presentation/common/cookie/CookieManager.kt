@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component
 class CookieManager {
     fun generateCookie(name: String, value: String, maxAge: Long): ResponseCookie {
         return ResponseCookie.from(name, value)
-                .httpOnly(true)
-                .secure(true)
+                .httpOnly(false)
+                .secure(false)
                 .path("/")
                 .maxAge(maxAge)
                 .build()

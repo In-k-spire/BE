@@ -1,11 +1,12 @@
-package suhyang.inkspire.domain.book
+package suhyang.inkspire.infrastructure.book
 
 import lombok.RequiredArgsConstructor
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import suhyang.inkspire.domain.book.Book
+import suhyang.inkspire.domain.book.BookRepository
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.user.User
-import suhyang.inkspire.infrastructure.book.BookJpaRepository
 import suhyang.inkspire.infrastructure.book.exception.BookNotFoundException
 
 @RequiredArgsConstructor
