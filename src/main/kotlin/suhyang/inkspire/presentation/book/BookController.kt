@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -56,5 +57,13 @@ class BookController(
     ): ResponseEntity<Unit> {
         bookService.delete(loginUser.id, bookId);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/search")
+    fun search(
+            @AuthenticationPrincipal loginUser: User,
+            @ModelAttribute bookSearchRequest: BookRequestDto.BookSearchRequest
+    ): ResponseEntity<List<BookResponseDto.NaverBookResponse>> {
+        return ResponseEntity.ok(bookService.search(bookSearchRequest.query, bookSearchRequest.display));
     }
 }

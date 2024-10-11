@@ -8,6 +8,7 @@ import suhyang.inkspire.domain.book.BookRepository
 import suhyang.inkspire.domain.category.Category
 import suhyang.inkspire.domain.category.CategoryRepository
 import suhyang.inkspire.domain.user.UserRepository
+import suhyang.inkspire.infrastructure.book.client.NaverClient
 import suhyang.inkspire.infrastructure.book.dto.BookRequestDto
 import suhyang.inkspire.infrastructure.book.dto.BookResponseDto
 
@@ -17,7 +18,8 @@ import suhyang.inkspire.infrastructure.book.dto.BookResponseDto
 class BookService(
         private val userRepository: UserRepository,
         private val categoryRepository: CategoryRepository,
-        private val bookRepository: BookRepository
+        private val bookRepository: BookRepository,
+        private val naverClient: NaverClient,
 ) {
 
     fun createBook(
@@ -58,5 +60,9 @@ class BookService(
         val book = bookRepository.getOneBook(bookId);
         book.validateHasSameUser(user);
         bookRepository.delete(book);
+    }
+
+    fun search(query: String, display: Int): List<BookResponseDto.NaverBookResponse> {
+        return naverClient.search(query, display);
     }
 }

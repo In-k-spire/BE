@@ -1,5 +1,6 @@
 package suhyang.inkspire.infrastructure.book.dto
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import suhyang.inkspire.domain.book.Book
 
 class BookResponseDto {
@@ -21,4 +22,18 @@ class BookResponseDto {
                 link = book.link,
                 image = book.image)
     }
+
+    data class NaverClientResponse(
+            @JsonProperty("items")
+            val naverBookResponseList: List<NaverBookResponse>
+    )
+
+    data class NaverBookResponse(
+            val title: String,
+            val description: String,
+            val author: String,
+            val publisher: String,
+            val link: String,
+            val image: String
+    )
 }
