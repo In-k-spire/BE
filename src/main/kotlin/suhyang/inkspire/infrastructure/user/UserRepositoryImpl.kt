@@ -1,13 +1,12 @@
-package suhyang.inkspire.domain.user
+package suhyang.inkspire.infrastructure.user
 
 import lombok.RequiredArgsConstructor
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
-import suhyang.inkspire.common.exception.NotFoundException
+import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.domain.user.UserRepository
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
 import suhyang.inkspire.infrastructure.auth.exception.UserNotFoundException
-import suhyang.inkspire.infrastructure.user.UserJpaRepository
 
 @RequiredArgsConstructor
 @Component
