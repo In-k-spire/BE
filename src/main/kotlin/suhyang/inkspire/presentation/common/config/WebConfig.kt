@@ -20,6 +20,7 @@ class WebConfig(
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
                 .allowedOrigins("https://ink-spire.netlify.app/", "http://localhost:3000")
-                .allowedMethods("*");
+                .allowedMethods("*")
+                .allowCredentials(true);
     }
 }
