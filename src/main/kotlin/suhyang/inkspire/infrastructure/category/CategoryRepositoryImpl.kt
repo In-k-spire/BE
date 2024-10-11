@@ -1,10 +1,10 @@
-package suhyang.inkspire.domain.category
+package suhyang.inkspire.infrastructure.category
 
 import lombok.RequiredArgsConstructor
-import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
+import suhyang.inkspire.domain.category.Category
+import suhyang.inkspire.domain.category.CategoryRepository
 import suhyang.inkspire.domain.user.User
-import suhyang.inkspire.infrastructure.category.CategoryJpaRepository
 import suhyang.inkspire.infrastructure.category.exception.CategoryNotFoundException
 
 @RequiredArgsConstructor
