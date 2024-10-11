@@ -2,7 +2,6 @@ package suhyang.inkspire.presentation.auth
 
 import suhyang.inkspire.application.auth.OAuthUri
 import lombok.RequiredArgsConstructor
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
@@ -12,7 +11,6 @@ import suhyang.inkspire.application.auth.OAuthClient
 import suhyang.inkspire.infrastructure.auth.dto.AuthRequest
 import suhyang.inkspire.infrastructure.auth.dto.AuthResponse
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
-import suhyang.inkspire.presentation.common.cookie.CookieManager
 import suhyang.inkspire.presentation.common.cookie.JwtTokenCookieGenerator
 
 @RestController
