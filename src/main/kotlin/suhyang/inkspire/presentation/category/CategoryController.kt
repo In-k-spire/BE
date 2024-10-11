@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import suhyang.inkspire.application.category.CategoryService
 import suhyang.inkspire.domain.user.User
@@ -52,9 +54,19 @@ class CategoryController(
 
     @GetMapping
     fun getAllCategory(
-            @AuthenticationPrincipal loginUser: User
+            @AuthenticationPrincipal loginUser: User,
+
     ): ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
-        val categoryResponseList = categoryService.getList(loginUser);
+        val categoryResponseList = categoryService.getListByUser(loginUser);
+        return ResponseEntity.ok(categoryResponseList);
+    }
+
+    @GetMapping("/page")
+    fun getPagingCategory(
+            @AuthenticationPrincipal loginUser: User,
+            @ModelAttribute paginationRequest: CategoryRequest.PaginationRequest
+    ): ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
+        val categoryResponseList = categoryService.getPagingListByUser(loginUser, paginationRequest.lastId, paginationRequest.limit);
         return ResponseEntity.ok(categoryResponseList);
     }
 
