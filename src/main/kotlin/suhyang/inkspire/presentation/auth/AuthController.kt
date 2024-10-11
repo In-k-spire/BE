@@ -36,7 +36,7 @@ class AuthController(
     fun generateToken(
             @PathVariable provider: String,
             @RequestBody tokenRequest: AuthRequest.TokenRequest
-    ): ResponseEntity<Unit> {
+    ): ResponseEntity<AuthResponse.JwtTokenResponse> {
         val oAuthUser: OAuthUser = oAuthClient.get(provider, tokenRequest.authorizationCode, tokenRequest.redirectUri);
         val jwtTokenResponse: AuthResponse.JwtTokenResponse = authService.generateJwtToken(oAuthUser);
 
@@ -44,10 +44,7 @@ class AuthController(
 
         val refreshTokenCookie: ResponseCookie = jwtTokenCookieGenerator.generateRefreshTokenCookie(jwtTokenResponse.refreshToken);
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.SET_COOKIE, accessTokenCookie.toString())
-                .header(HttpHeaders.SET_COOKIE, refreshTokenCookie.toString())
-                .build();
+        return ResponseEntity.ok(jwtTokenResponse);
     }
 
     @PatchMapping("/reissue/token")
