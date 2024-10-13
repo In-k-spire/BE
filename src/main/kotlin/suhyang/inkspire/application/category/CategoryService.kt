@@ -49,10 +49,19 @@ class CategoryService(
     }
 
     @Transactional
-    fun getList(
+    fun getListByUser(
             user: User
     ): List<CategoryResponseDto.CategoryResponse> {
         val categoryList: List<Category> = categoryRepository.findByUser(user);
+        return categoryList.map { CategoryResponseDto.CategoryResponse(it, emptyList()) };
+    }
+    @Transactional
+    fun getPagingListByUser(
+            user: User,
+            lastId: Long?,
+            limit: Int,
+    ): List<CategoryResponseDto.CategoryResponse> {
+        val categoryList: List<Category> = categoryRepository.findPagingListByUser(user, lastId, limit);
         return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.take(5).map {book -> BookResponseDto.BookResponse(book)}) };
     }
 

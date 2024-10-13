@@ -1,5 +1,7 @@
 package suhyang.inkspire.infrastructure.category
 
+import jakarta.persistence.EntityManager
+import jakarta.persistence.PersistenceContext
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Component
 import suhyang.inkspire.domain.category.Category
@@ -10,7 +12,8 @@ import suhyang.inkspire.infrastructure.category.exception.CategoryNotFoundExcept
 @RequiredArgsConstructor
 @Component
 class CategoryRepositoryImpl(
-        private val categoryJpaRepository: CategoryJpaRepository
+        private val categoryJpaRepository: CategoryJpaRepository,
+        @PersistenceContext private val entityManager: EntityManager
 ): CategoryRepository {
     override fun saveCategory(category: Category): Category {
         return categoryJpaRepository.save(category);
@@ -22,6 +25,22 @@ class CategoryRepositoryImpl(
 
     override fun findByUser(user: User): List<Category> {
         return categoryJpaRepository.findByUser(user);
+    }
+
+    override fun findPagingListByUser(user: User, lastId: Long?, limit: Int): List<Category> {
+        val query = entityManager.createQuery("""
+        select c from Category c 
+        left join fetch c.bookList 
+        where c.user = :user 
+        and (:lastId is null or c.id < :lastId)
+        order by c.id desc
+    """, Category::class.java);
+
+        query.setParameter("user", user);
+        query.setParameter("lastId", lastId);
+        query.setMaxResults(limit);
+
+        return query.resultList;
     }
 
     override fun delete(category: Category): Unit {

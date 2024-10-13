@@ -10,4 +10,9 @@ class BookRequestDto {
             val image: String,
             val categoryId: Long
     )
+
+    data class BookSearchRequest(
+            val query: String,
+            val display: Int = 10,
+    )
 }
