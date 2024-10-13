@@ -37,4 +37,7 @@ jwt:
   cookie:
     access-time: ${jwt.cookie.access-time}
     refresh-time: ${jwt.cookie.refresh-time}
+naver:
+  client-id: ${naver.client-id}
+  client-secret: ${naver.client-secret}
 
