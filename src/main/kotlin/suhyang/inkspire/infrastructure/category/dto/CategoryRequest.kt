@@ -12,5 +12,6 @@ class CategoryRequest {
     data class PaginationRequest(
             val lastId: Long?,
             val limit: Int = 5,
+            val name: String = ""
     )
 }

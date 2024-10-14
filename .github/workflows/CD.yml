@@ -74,6 +74,7 @@ jobs:
             echo DB_USERNAME=${{ secrets.DB_USERNAME }} >> .env
             echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
             echo DB_ROOT_PASSWORD=${{ secrets.DB_ROOT_PASSWORD }} >> .env
+            echo REDIS_PASSWORD=${{ secrets.REDIS_PASSWORD }} >> .env
             
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }}
