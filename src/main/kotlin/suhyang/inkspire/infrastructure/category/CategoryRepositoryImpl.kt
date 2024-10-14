@@ -27,17 +27,18 @@ class CategoryRepositoryImpl(
         return categoryJpaRepository.findByUser(user);
     }
 
-    override fun findPagingListByUser(user: User, lastId: Long?, limit: Int): List<Category> {
+    override fun findPagingListByUser(user: User, lastId: Long?, limit: Int, name: String): List<Category> {
         val query = entityManager.createQuery("""
-        select c from Category c 
-        left join fetch c.bookList 
+        select c from Category c
         where c.user = :user 
+        and c.name like :name
         and (:lastId is null or c.id < :lastId)
         order by c.id desc
     """, Category::class.java);
 
         query.setParameter("user", user);
         query.setParameter("lastId", lastId);
+        query.setParameter("name", "%$name%");
         query.setMaxResults(limit);
 
         return query.resultList;
