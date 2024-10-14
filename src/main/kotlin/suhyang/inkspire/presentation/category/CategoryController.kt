@@ -66,7 +66,12 @@ class CategoryController(
             @AuthenticationPrincipal loginUser: User,
             @ModelAttribute paginationRequest: CategoryRequest.PaginationRequest
     ): ResponseEntity<List<CategoryResponseDto.CategoryResponse>> {
-        val categoryResponseList = categoryService.getPagingListByUser(loginUser, paginationRequest.lastId, paginationRequest.limit);
+        val categoryResponseList = categoryService.getPagingListByUser(
+                loginUser,
+                paginationRequest.lastId,
+                paginationRequest.limit,
+                paginationRequest.name
+        );
         return ResponseEntity.ok(categoryResponseList);
     }
 

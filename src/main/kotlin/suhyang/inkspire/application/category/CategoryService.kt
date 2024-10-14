@@ -60,8 +60,9 @@ class CategoryService(
             user: User,
             lastId: Long?,
             limit: Int,
+            name: String
     ): List<CategoryResponseDto.CategoryResponse> {
-        val categoryList: List<Category> = categoryRepository.findPagingListByUser(user, lastId, limit);
+        val categoryList: List<Category> = categoryRepository.findPagingListByUser(user, lastId, limit, name);
         return categoryList.map { CategoryResponseDto.CategoryResponse(it, it.bookList.take(5).map {book -> BookResponseDto.BookResponse(book)}) };
     }
 
