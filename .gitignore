@@ -41,6 +41,11 @@ out/
 
 .env
 env.yml
+env.local.yml
+
+docker-compose.local.yml
+
+/mysql_data
 
 ### REST Docs ###
 /inkspire/src/main/resources/static/docs

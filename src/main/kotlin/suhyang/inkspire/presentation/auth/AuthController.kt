@@ -2,16 +2,17 @@ package suhyang.inkspire.presentation.auth
 
 import suhyang.inkspire.application.auth.OAuthUri
 import lombok.RequiredArgsConstructor
-import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import suhyang.inkspire.application.auth.AuthService
 import suhyang.inkspire.application.auth.OAuthClient
+import suhyang.inkspire.domain.user.User
 import suhyang.inkspire.infrastructure.auth.dto.AuthRequest
 import suhyang.inkspire.infrastructure.auth.dto.AuthResponse
 import suhyang.inkspire.infrastructure.auth.dto.OAuthUser
 import suhyang.inkspire.presentation.common.cookie.JwtTokenCookieGenerator
+import suhyang.inkspire.presentation.common.principal.AuthenticationPrincipal
 
 @RestController
 @RequestMapping("/api/auth")
@@ -20,7 +21,7 @@ class AuthController(
         private val oAuthUri: OAuthUri,
         private val oAuthClient: OAuthClient,
         private val authService: AuthService,
-        private val jwtTokenCookieGenerator: JwtTokenCookieGenerator
+        private val jwtTokenCookieGenerator: JwtTokenCookieGenerator,
 ) {
 
     @GetMapping("/{provider}/uri")
@@ -55,6 +56,14 @@ class AuthController(
                 accessToken =  authService.reIssueAccessToken(reissueRequest.refreshToken)
         );
         return ResponseEntity.ok(reissuedTokenResponse);
+    }
+
+    @DeleteMapping("/logout")
+    fun logout(
+            @AuthenticationPrincipal loginUser: User
+    ): ResponseEntity<Unit> {
+        authService.logout(loginUser.id);
+        return ResponseEntity.ok().build();
     }
 
 }
