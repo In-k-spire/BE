@@ -6,18 +6,23 @@ import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.JwtParser
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
+import lombok.RequiredArgsConstructor
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
+import suhyang.inkspire.domain.auth.Token
+import suhyang.inkspire.domain.auth.TokenRepository
 import suhyang.inkspire.infrastructure.auth.exception.ExpiredTokenException
 import suhyang.inkspire.infrastructure.auth.exception.InvalidTokenException
 import java.util.*
 import javax.crypto.SecretKey
 
+@RequiredArgsConstructor
 @Component
 class JwtTokenProvider(
         @Value("\${jwt.secret-key}") val secretKey: String,
         @Value("\${jwt.access-time}") val accessTime: Long,
-        @Value("\${jwt.refresh-time}") val refreshTime: Long
+        @Value("\${jwt.refresh-time}") val refreshTime: Long,
+        private val tokenRepository: TokenRepository,
 ): TokenProvider {
 
     override fun createAccessToken(subject: String): String {
@@ -25,7 +30,9 @@ class JwtTokenProvider(
     }
 
     override fun createRefreshToken(subject: String): String {
-        return createToken(subject, refreshTime);
+        val refreshToken = createToken(subject, refreshTime);
+        tokenRepository.save(Token(refreshToken, subject, refreshTime));
+        return refreshToken;
     }
 
     fun createToken(subject: String, expireTime: Long): String {

@@ -40,4 +40,8 @@ jwt:
 naver:
   client-id: ${naver.client-id}
   client-secret: ${naver.client-secret}
+redis:
+  host: ${redis.host}
+  port: ${redis.port}
+  password: ${redis.password}
 
