@@ -18,6 +18,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
+        default_batch_fetch_size: 10
     show-sql: true
 oauth:
   github:

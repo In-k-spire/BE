@@ -30,7 +30,7 @@ class CategoryRepositoryImpl(
     override fun findPagingListByUser(user: User, lastId: Long?, limit: Int, name: String): List<Category> {
         val query = entityManager.createQuery("""
         select c from Category c
-        where c.user = :user 
+        where c.user = :user
         and c.name like :name
         and (:lastId is null or c.id < :lastId)
         order by c.id desc
